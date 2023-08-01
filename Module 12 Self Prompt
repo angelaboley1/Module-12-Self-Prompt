@@ -1,0 +1,45 @@
+def gradeDict(results):
+    scores = {}
+    for number in results:
+        if number not in scores:
+            scores[number] = 0
+        scores[number] += 1
+    return scores
+
+
+def gradeMean(results):
+    return sum(results) / len(results)
+
+
+
+grades = []
+
+print("Welcome to Angela's Grade Distribution code! This program will tell you how often a score occured for an assignment and the mean average. It works by taking in all number scores.")
+
+while True:
+    digits = input("Enter a number score or done if finished: ")
+    if digits == "done" or digits == "Done":
+        break
+        
+    if digits.isdigit():
+        num = int(digits)
+        grades.append(num)
+    else:
+        #this accounts for if the user inputs a letter grade instead of a number
+        print("Invalid input. Please enter a number or done if finished.")
+
+
+distribution = gradeDict(grades)
+mean = gradeMean(grades)
+
+
+file = open("distribution.txt", "w")
+file.write("Number Frequency\n")
+for num, freq in distribution.items():
+    file.write(f"{num} {freq}\n")
+file.write(f"Mean: {mean}")
+file.close()
+
+print("Your classes average mean is:", mean, "You can find your file of the distribution and mean under the name distribution.txt. Thank you for using my program!")
+
+
